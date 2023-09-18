@@ -1,4 +1,6 @@
-package com.example.homework.HomeWork12_Dev;
+package com.example.homework.HomeWork12_Dev.controller;
+import com.example.homework.HomeWork12_Dev.service.NoteService;
+import com.example.homework.HomeWork12_Dev.model.Note;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +21,12 @@ public class NoteController {
     }
     @GetMapping("/add")
     public String showAddNoteForm(Model model) {
-        model.addAttribute("note", new Note()); // Передаємо порожній об'єкт Note на сторінку
+        model.addAttribute("note", new Note());
         return "add";
     }
 
     @PostMapping("/add")
     public String addNote(@ModelAttribute Note note) {
-        // Додавання нової нотатки до сервісу
         noteService.add(note);
         return "redirect:/note/list";
     }
